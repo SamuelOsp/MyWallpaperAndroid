@@ -1,0 +1,14 @@
+<div class="app-card" [class.clickable]="clickable" [style.background]="color">
+  <div class="app-card-header" *ngIf="header || subheader">
+    <div class="app-card-title">{{ header }}</div>
+    <div class="app-card-subtitle" *ngIf="subheader">{{ subheader }}</div>
+  </div>
+
+  <div class="app-card-content">
+    <ng-content></ng-content> 
+  </div>
+
+  <div class="app-card-footer" *ngIf="footer">
+    {{ footer }}
+  </div>
+</div>
