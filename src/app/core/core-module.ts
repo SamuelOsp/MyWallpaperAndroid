@@ -10,6 +10,7 @@ import { Auth } from './providers/auth/auth';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { Query } from './providers/query/query';
 
+
 const providers =[Auth, Query]
 
 @NgModule({

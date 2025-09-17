@@ -8,7 +8,8 @@ export class Auth {
 
 
   async register(email: string, password: string){
-    await createUserWithEmailAndPassword(this.authFirebase, email, password);
+    const resp = await createUserWithEmailAndPassword(this.authFirebase, email, password);
+    return resp.user.uid;
   }
 async login(){
   

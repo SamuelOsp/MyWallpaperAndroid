@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { User } from 'src/app/shared/services/user/user';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +16,10 @@ export class RegisterPage implements OnInit {
   public password!: FormControl;
   public registerForm!: FormGroup;
 
-  constructor(private navCtrl: NavController) { 
+  constructor(
+    private navCtrl: NavController,
+    private readonly userSrv: User
+  ) {
     this.initForm();
   }
 
@@ -31,12 +35,11 @@ export class RegisterPage implements OnInit {
       lastname: this.lastname,
       email: this.email,
       password: this.password,
-    
     });
   }
-  public doRegister(){
+  public async doRegister(){
     console.log(this.registerForm.value);
-
+    await this.userSrv.create(this.registerForm.value as any);
   }
 
 
