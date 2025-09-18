@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { File } from 'src/app/core/providers/file/file';
+import { Uploader } from 'src/app/core/providers/uploader/uploader';
+import { IImage } from 'src/app/Interfaces/image.interface';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -15,10 +18,12 @@ export class RegisterPage implements OnInit {
   public email!: FormControl;
   public password!: FormControl;
   public registerForm!: FormGroup;
-
+  public image: IImage | null = null;
   constructor(
     private navCtrl: NavController,
-    private readonly userSrv: User
+    private readonly userSrv: User,
+    private readonly fileSrv: File,
+    private readonly uploaderSrv: Uploader
   ) {
     this.initForm();
   }
@@ -42,5 +47,19 @@ export class RegisterPage implements OnInit {
     await this.userSrv.create(this.registerForm.value as any);
   }
 
+  public async pickImage(){
+    const res = await this.fileSrv.pickImage();
+    this.image = res;
+
+     if (!this.image?.data) {
+    return;
+  }
+
+    await this.uploaderSrv.upload("images",
+      this.image.name,
+      this.image.mimeType, 
+      this.image.data
+    );
+  }
 
 }

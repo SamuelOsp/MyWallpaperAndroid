@@ -5,6 +5,10 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <app-button (click)="pickImage()">Pick Image</app-button>
+  <pre> {{image | json}}</pre>
+  
   <app-card>
     <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
       <ion-grid>
