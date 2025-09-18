@@ -9,7 +9,7 @@ public class MainActivity extends BridgeActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    // registrar el plugin
+   
     registerPlugin(WallPaperPlugin.class);
   }
 }
