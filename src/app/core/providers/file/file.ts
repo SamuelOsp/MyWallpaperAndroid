@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { FilePicker } from '@capawesome/capacitor-file-picker'
 import { NativeToast } from '../nativeToast/native-toast';
 import { Capacitor } from '@capacitor/core';
-import { IImage } from 'src/app/Interfaces/image.interface';
+import { IImage } from 'src/interface/image.interface';
 @Injectable({
   providedIn: 'root'
 })

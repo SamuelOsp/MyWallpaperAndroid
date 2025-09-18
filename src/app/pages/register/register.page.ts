@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { File } from 'src/app/core/providers/file/file';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
-import { IImage } from 'src/app/Interfaces/image.interface';
+import { IImage } from 'src/interface/image.interface';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -19,6 +19,7 @@ export class RegisterPage implements OnInit {
   public password!: FormControl;
   public registerForm!: FormGroup;
   public image: IImage | null = null;
+  public imageUrl = '';
   constructor(
     private navCtrl: NavController,
     private readonly userSrv: User,
@@ -55,11 +56,18 @@ export class RegisterPage implements OnInit {
     return;
   }
 
-    await this.uploaderSrv.upload("images",
-      this.image.name,
+    const path = await this.uploaderSrv.upload(
+      'images',
+      `${Date.now()}-${this.image.name}`,
       this.image.mimeType, 
       this.image.data
     );
+    console.log(path);
+    this.imageUrl = await this.uploaderSrv.getUrl('images', path );
   }
 
+
+    public goToLogin() {
+    this.navCtrl.navigateRoot('/login');
+  }
 }

@@ -16,6 +16,15 @@ export class Uploader {
     });
     console.log(error);
     console.log(data);
-    return data?.fullPath;
+    return data?.path || '';
   }
+
+  async getUrl(bucket: string, path: string): Promise<string>{
+  const {data, error} =  await supabase.storage.from(bucket)
+  .createSignedUrl(path, 3600);
+  return data?.signedUrl || '';
+  }
+
+
+
 }
