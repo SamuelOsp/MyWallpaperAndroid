@@ -1,16 +1,10 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-title>Register</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
-  <app-button (click)="pickImage()">Pick Image</app-button>
-  @if(imageUrl){
-    <img [src]="imageUrl">
-  }
-  
   <app-card>
     <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
       <ion-grid>
@@ -49,6 +43,7 @@
             ></app-input>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
             <app-input
@@ -60,13 +55,26 @@
             ></app-input>
           </ion-col>
         </ion-row>
+
         <ion-row>
           <ion-col>
-            <app-button type="submit" color="primary" [disabled]="registerForm.invalid">Register</app-button>
+            <app-button
+              type="submit"
+              color="primary"
+              [disabled]="registerForm.invalid"
+              >Register</app-button
+            >
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col>
+            <app-button color="secondary" (click)="goToLogin()"
+              >Go to Login</app-button
+            >
           </ion-col>
         </ion-row>
       </ion-grid>
     </form>
   </app-card>
-
 </ion-content>
