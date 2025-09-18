@@ -4,13 +4,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" class="ion-padding">
+<app-card *ngIf="imageUrl$ | async as img">
+  <img 
+    [src]="img" 
+    (click)="setMyWallpaper(3, img)" 
+    style="width: 100%; border-radius: 12px; cursor: pointer;" 
+  />
+</app-card>
 
-  @if(imageUrl){
-    <ion-card>
-      <img [src]="imageUrl" />
-    </ion-card>
-  }
+
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button>
