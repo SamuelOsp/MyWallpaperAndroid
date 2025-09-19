@@ -1,7 +1,7 @@
 package io.ionic.starter;
 
 import android.os.Bundle;
-import io.ionic.starter.WallPaperPlugin;
+import io.ionic.starter.WallpaperPlugin;
 import com.getcapacitor.BridgeActivity;
 
 public class MainActivity extends BridgeActivity {
@@ -9,7 +9,7 @@ public class MainActivity extends BridgeActivity {
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-   
-    registerPlugin(WallPaperPlugin.class);
+
+    registerPlugin(WallpaperPlugin.class);
   }
 }

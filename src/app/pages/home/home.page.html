@@ -6,12 +6,14 @@
 
 <ion-content [fullscreen]="true" class="ion-padding">
 <app-card *ngIf="imageUrl$ | async as img">
-  <img 
-    [src]="img" 
-    (click)="setMyWallpaper(3, img)" 
-    style="width: 100%; border-radius: 12px; cursor: pointer;" 
-  />
+  <img
+  [src]="img"
+  (click)="onImageTap(img)"
+  style="width:100%; border-radius:12px; cursor:pointer"
+/>
+
 </app-card>
+<ion-button expand="block" (click)="debugTap()">Test plugin (echo)</ion-button>
 
 
 

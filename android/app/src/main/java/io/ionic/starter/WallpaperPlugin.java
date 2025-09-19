@@ -19,13 +19,20 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 @CapacitorPlugin(name = "WallpaperPlugin")
-public class WallPaperPlugin extends Plugin {
-
+public class WallpaperPlugin extends Plugin {
 
   private final ExecutorService executor = Executors.newSingleThreadExecutor();
   private static final int WALLPAPER_TYPE_HOME = WallpaperManager.FLAG_SYSTEM;
   private static final int WALLPAPER_TYPE_LOCK = WallpaperManager.FLAG_LOCK;
   private static final int WALLPAPER_TYPE_BOTH = WALLPAPER_TYPE_HOME | WALLPAPER_TYPE_LOCK;
+
+  @PluginMethod
+  public void echo(PluginCall call) {
+    String value = call.getString("value");
+    JSObject ret = new JSObject();
+    ret.put("value", value);
+    call.resolve(ret);
+  }
 
   @PluginMethod
   public void setWallpaper(PluginCall call) {
@@ -52,7 +59,6 @@ public class WallPaperPlugin extends Plugin {
         }
 
         WallpaperManager myWallpaperManager = WallpaperManager.getInstance(getContext());
-
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
           myWallpaperManager.setBitmap(myBitmap, null, true, wallpaperType);

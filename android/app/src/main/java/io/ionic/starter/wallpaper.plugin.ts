@@ -15,4 +15,5 @@ export interface WallpaperResult {
 
 export const WallpaperPlugin = registerPlugin<{
   setWallpaper(options: WallpaperOptions): Promise<WallpaperResult>;
+  echo?(options: { value: string }): Promise<{ value: string }>;
 }>('WallpaperPlugin');
