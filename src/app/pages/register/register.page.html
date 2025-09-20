@@ -1,80 +1,86 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Register</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="reg-bg">
+  <div class="reg-container">
+    <app-card class="reg-card">
+      <div class="headline">
+        <ion-icon name="planet-outline"></ion-icon>
+        <h1>Create your account</h1>
+        <p class="subtitle">
+          Join MyWally to sync and personalize your wallpapers.
+        </p>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <app-card>
-    <form [formGroup]="registerForm" (ngSubmit)="doRegister()">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Name"
-              type="text"
-              placeholder="Enter your name"
-              required
-              formControlName="name"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+      <form [formGroup]="registerForm" (ngSubmit)="doRegister()" novalidate>
+        <ion-grid class="no-pad">
+          <ion-row class="g-12">
+            <ion-col size="12" size-md="6">
+              <app-input
+                label="First Name"
+                type="text"
+                placeholder="Enter your first name"
+                formControlName="name"
+                required
+              >
+              </app-input>
+            </ion-col>
 
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Last Name"
-              type="text"
-              placeholder="Enter your last name"
-              required
-              formControlName="lastname"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+            <ion-col size="12" size-md="6">
+              <app-input
+                label="Last Name"
+                type="text"
+                placeholder="Enter your last name"
+                formControlName="lastname"
+                required
+              >
+              </app-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Email"
-              type="email"
-              placeholder="Enter your email"
-              required
-              formControlName="email"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <app-input
+                label="Email"
+                type="email"
+                placeholder="your@email.com"
+                formControlName="email"
+                required
+              >
+              </app-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Password"
-              type="password"
-              placeholder="Enter your password"
-              required
-              formControlName="password"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <app-input
+                label="Password"
+                type="password"
+                placeholder="Minimum 5 characters"
+                formControlName="password"
+                required
+              >
+              </app-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <app-button
-              type="submit"
-              color="primary"
-              [disabled]="registerForm.invalid"
-              >Register</app-button
-            >
-          </ion-col>
-        </ion-row>
+          <ion-row class="actions">
+            <ion-col size="12">
+              <app-button
+                type="submit"
+                color="primary"
+                [disabled]="registerForm.invalid"
+              >
+                Sign Up
+              </app-button>
+            </ion-col>
 
-        <ion-row>
-          <ion-col>
-            <app-button color="secondary" (click)="goToLogin()"
-              >Go to Login</app-button
-            >
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
-  </app-card>
+            <ion-col size="12" class="muted">
+              Already have an account?
+              <app-button color="secondary" fill="clear" (click)="goToLogin()">
+                Log In
+              </app-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </app-card>
+  </div>
 </ion-content>

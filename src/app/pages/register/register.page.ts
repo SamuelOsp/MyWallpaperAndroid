@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 import { User } from 'src/app/shared/services/user/user';
 
 @Component({
@@ -19,6 +20,7 @@ export class RegisterPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private readonly userSrv: User,
+    private toast: NativeToast
   ) {
     this.initForm();
   }
@@ -38,9 +40,21 @@ export class RegisterPage implements OnInit {
     });
   }
   public async doRegister(){
-    console.log(this.registerForm.value);
-    await this.userSrv.create(this.registerForm.value as any);
-    this.navCtrl.navigateRoot('/login');
+    
+    if (this.registerForm.invalid) {
+    this.registerForm.markAllAsTouched(); 
+    this.toast.show('Please complete all required fields.', 'danger', 'bottom');
+    return;
+  }
+    try {
+      console.log(this.registerForm.value);
+      await this.userSrv.create(this.registerForm.value as any);
+      this.toast.show('Registration successful. Welcome!', 'success', 'bottom');
+
+      this.navCtrl.navigateRoot('/login');
+    } catch (e: any) {
+      this.toast.show(`Registration failed: ${e?.message ?? 'Please try again.'}`, 'danger', 'bottom');
+    }
   }
 
 

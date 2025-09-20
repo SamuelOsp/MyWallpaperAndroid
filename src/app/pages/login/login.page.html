@@ -1,53 +1,60 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="reg-bg">
+  <div class="reg-container">
+    <app-card class="reg-card">
+      <div class="headline">
+        <ion-icon name="log-in-outline" style="height: 50px"></ion-icon>
+        <h1>Welcome back</h1>
+        <p class="subtitle">
+          Log in to continue exploring MyWally.
+        </p>
+      </div>
 
-<ion-content [fullscreen]="true">
-  <app-card>
-    <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Email"
-              type="email"
-              placeholder="Enter your email"
-              required
-              formControlName="email"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+      <form [formGroup]="loginForm" (ngSubmit)="doLogin()" novalidate>
+        <ion-grid class="no-pad">
+          <ion-row class="g-12">
+            <ion-col size="12">
+              <app-input
+                label="Email"
+                type="email"
+                placeholder="your@email.com"
+                formControlName="email"
+                required
+              ></app-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <app-input
-              label="Password"
-              type="password"
-              placeholder="Enter your password"
-              required
-              formControlName="password"
-            ></app-input>
-          </ion-col>
-        </ion-row>
+          <ion-row>
+            <ion-col size="12">
+              <app-input
+                label="Password"
+                type="password"
+                placeholder="Enter your password"
+                formControlName="password"
+                required
+              ></app-input>
+            </ion-col>
+          </ion-row>
 
-        <ion-row>
-          <ion-col>
-            <app-button type="submit" color="primary" [disabled]="loginForm.invalid">
-              Login
-            </app-button>
-          </ion-col>
-        </ion-row>
+          <ion-row class="actions">
+            <ion-col size="12">
+              <app-button
+                type="submit"
+                color="primary"
+                [disabled]="loginForm.invalid"
+              >
+                Log In
+              </app-button>
+            </ion-col>
 
-        <ion-row>
-          <ion-col>
-            <app-button color="secondary" (click)="goToRegister()">
-              Go to Register
-            </app-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
-  </app-card>
+            <ion-col size="12" class="muted">
+              Don't have an account?
+              <app-button color="secondary" fill="clear" (click)="goToRegister()">
+                Sign Up
+              </app-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </form>
+    </app-card>
+  </div>
 </ion-content>
