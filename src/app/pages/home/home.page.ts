@@ -1,10 +1,12 @@
+// home.page.ts
 import { Component, OnInit } from '@angular/core';
 import {
   ActionSheetController,
   NavController,
   ToastController,
+  Platform,
 } from '@ionic/angular';
-import { Wallpaper as WallpaperPlugin } from 'src/capacitor/wallpaper';
+import {Wallpaper} from 'src/capacitor/wallpaper'; 
 import { Auth } from 'src/app/core/providers/auth/auth';
 import { File } from 'src/app/core/providers/file/file';
 import { Uploader } from 'src/app/core/providers/uploader/uploader';
@@ -12,7 +14,7 @@ import { IImage } from 'src/interface/image.interface';
 import { supabase } from 'src/app/database/supabase';
 import { getAuth } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
-import { Capacitor } from '@capacitor/core';
+import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 
 enum WallpaperType {
   HOME = 1,
@@ -28,10 +30,8 @@ enum WallpaperType {
 })
 export class HomePage implements OnInit {
   public image!: IImage;
-
   public imageUrl$ = new BehaviorSubject<string>('');
   public images$ = new BehaviorSubject<string[]>([]);
-
   private firebaseUid = '';
 
   constructor(
@@ -40,13 +40,13 @@ export class HomePage implements OnInit {
     private readonly uploaderSrv: Uploader,
     private readonly authSrv: Auth,
     private actionSheetCtrl: ActionSheetController,
-    private toastCtrl: ToastController
+    private toast: NativeToast,
+    private platform: Platform
   ) {}
 
   async ngOnInit() {
     const auth = getAuth();
     this.firebaseUid = auth.currentUser?.uid || '';
-
     if (!this.firebaseUid) {
       console.error('Usuario no autenticado en Firebase');
       return;
@@ -54,48 +54,46 @@ export class HomePage implements OnInit {
 
     const { data: rows, error } = await supabase
       .from('user_images')
-      .select('path')
-      .eq('user_id', this.firebaseUid);
+      .select('path, created_at')
+      .eq('user_id', this.firebaseUid)
+      .not('path', 'is', null)
+      .order('created_at', { ascending: false });
 
     if (error) {
       console.error('Error cargando imágenes', error.message);
       return;
     }
 
-    const urls = await Promise.all(
-      rows.map((row: any) => this.uploaderSrv.getUrl('images', row.path))
+    const rawUrls: string[] = await Promise.all(
+      (rows || []).map((row: any) => this.uploaderSrv.getUrl('images', row.path))
+    );
+
+    
+    const urls = Array.from(
+      new Set(rawUrls.filter((u): u is string => !!u && !!u.trim()))
     );
 
     this.images$.next(urls);
-
-    if (urls.length > 0) {
-      this.imageUrl$.next(urls[urls.length - 1]);
-    }
+    if (urls.length > 0) this.imageUrl$.next(urls[0]); 
   }
+
+  trackByUrl = (_: number, url: string) => url;
 
   public async addImage() {
     const res = await this.fileSrv.pickImage();
     this.image = res;
-
     if (!this.image?.data) return;
 
     const path = `${Date.now()}-${this.image.name}`;
-
-    await this.uploaderSrv.upload(
-      'images',
-      path,
-      this.image.mimeType,
-      this.image.data
-    );
-
-    await supabase
-      .from('user_images')
-      .insert([{ user_id: this.firebaseUid, path }]);
+    await this.uploaderSrv.upload('images', path, this.image.mimeType, this.image.data);
+    await supabase.from('user_images').insert([{ user_id: this.firebaseUid, path }]);
 
     const url = await this.uploaderSrv.getUrl('images', path);
+    if (!url || !url.trim()) return;
 
-    const currentImages = this.images$.getValue();
-    this.images$.next([...currentImages, url]);
+    const current = this.images$.getValue();
+    const next = Array.from(new Set([url, ...current]));
+    this.images$.next(next);
     this.imageUrl$.next(url);
   }
 
@@ -108,84 +106,51 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateRoot('/login');
   }
 
-  public async showWallpaperOptions() {
-    const actionSheet = await this.actionSheetCtrl.create({
-      header: 'Establecer como fondo de pantalla',
-      buttons: [
-        {
-          text: 'Pantalla principal',
-          icon: 'image-outline',
-          handler: () => this.setMyWallpaper(WallpaperType.HOME),
-        },
-        {
-          text: 'Pantalla de bloqueo',
-          icon: 'lock-closed-outline',
-          handler: () => this.setMyWallpaper(WallpaperType.LOCK),
-        },
-        {
-          text: 'Ambas',
-          icon: 'apps-outline',
-          handler: () => this.setMyWallpaper(WallpaperType.BOTH),
-        },
-        {
-          text: 'Cancelar',
-          icon: 'close-outline',
-          role: 'cancel',
-        },
-      ],
-    });
-    await actionSheet.present();
-  }
-  async onImageTap(img: string) {
-  console.log('onImageTap CLICK', img);
-  await this.setMyWallpaper(WallpaperType.BOTH, img);
+  public async showWallpaperOptions(imgUrl?: string) {
+  const actionSheet = await this.actionSheetCtrl.create({
+    header: 'Establecer como fondo de pantalla',
+    buttons: [
+      { text: 'Pantalla principal', icon: 'image-outline', handler: () => this.setMyWallpaper(WallpaperType.HOME, imgUrl) },
+      { text: 'Pantalla de bloqueo', icon: 'lock-closed-outline', handler: () => this.setMyWallpaper(WallpaperType.LOCK, imgUrl) },
+      { text: 'Ambas', icon: 'apps-outline', handler: () => this.setMyWallpaper(WallpaperType.BOTH, imgUrl) },
+      { text: 'Cancelar', icon: 'close-outline', role: 'cancel' },
+    ],
+  });
+  await actionSheet.present();
+}
+async onImageTap(img: string) {
+  await this.showWallpaperOptions(img);
 }
 
   public async setMyWallpaper(type: WallpaperType, imgUrl?: string) {
-    console.log('Platform:', Capacitor.getPlatform());
-    console.log('Plugin disponible:', Capacitor.isPluginAvailable('WallpaperPlugin'));
-
-  const isNative = (Capacitor as any).isNativePlatform
-    ? (Capacitor as any).isNativePlatform()
-    : Capacitor.getPlatform() !== 'web';
-
-  if (!isNative) {
-    this.presentToast('Esta función solo está disponible en Android (no en web).', 'danger');
-    return;
-  }
-
-  if (!Capacitor.isPluginAvailable('WallpaperPlugin')) {
-    this.presentToast('El plugin de fondo de pantalla no está disponible.', 'danger');
-    return;
-  }
-
-  try {
     const url = imgUrl || this.imageUrl$.getValue();
+    if (!url) {
+      this.toast.show('the image does not exist', 'danger', 'bottom', 3000);
+      return;
+    }
 
-    const result = await WallpaperPlugin.setWallpaper({ imageUrl: url, type });
-    if (result.success) this.presentToast('Fondo de pantalla establecido con éxito.');
-    else this.presentToast(`Error: ${result.message ?? 'Fallo desconocido'}`, 'danger');
-  } catch (e: any) {
-    this.presentToast(`Error al establecer fondo: ${e?.message ?? 'Error desconocido.'}`, 'danger');
-  }
-}
+    
+    if (this.platform.is('android')) {
+      const native = (window as any).Capacitor?.Plugins?.WallpaperPlugin;
+      try {
+        const r = await native.setWallpaper({ imageUrl: url, type });
+        if (r?.success) this.toast.show('Wallpaper successfully set.', 'successfully', 'middle', 3000);
+        else this.toast.show(`Error: ${r?.message ?? 'Desconocido'}`, 'danger');
+      } catch (e: any) {
+        this.toast.show(`Error nativo: ${e?.message ?? 'Desconocido'}`, 'danger');
+      }
+      return;
+    }
 
+  
+    try {
+      const res = await Wallpaper.setWallpaper({ imageUrl: url, type });
+      if (res?.success) this.toast.show('Wallpaper successfully set.');
+      else this.toast.show(`Error: ${res?.message ?? 'Desconocido'}`, 'danger');
+    } catch (e: any) {
+      this.toast.show(`No disponible: ${e?.message ?? 'Desconocido'}`, 'danger');
+    }
+  }
 
-  private async presentToast(message: string, color: string = 'success') {
-    const toast = await this.toastCtrl.create({
-      message,
-      duration: 2000,
-      color,
-    });
-    await toast.present();
-  }
-  async debugTap() {
-  console.log('Platform:', Capacitor.getPlatform());
-  try {
-    const r = await (WallpaperPlugin as any).echo?.({ value: 'ping' });
-    console.log('echo ok:', r);
-  } catch (e) {
-    console.log('echo error:', e);
-  }
-}
+  
 }

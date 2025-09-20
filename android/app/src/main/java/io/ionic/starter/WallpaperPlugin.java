@@ -37,13 +37,23 @@ public class WallpaperPlugin extends Plugin {
   @PluginMethod
   public void setWallpaper(PluginCall call) {
     String imageUrl = call.getString("imageUrl");
-    int wallpaperType = call.getInt("type", WALLPAPER_TYPE_HOME);
+    int requestedType = call.getInt("type", 1);
 
     if (imageUrl == null || imageUrl.isEmpty()) {
       call.reject("Must provide an imageUrl");
       return;
     }
 
+    final int wallpaperType;
+    if (requestedType == 1) {
+      wallpaperType = WALLPAPER_TYPE_HOME;
+    } else if (requestedType == 2) {
+      wallpaperType = WALLPAPER_TYPE_LOCK;
+    } else if (requestedType == 3) {
+      wallpaperType = WALLPAPER_TYPE_BOTH;
+    } else {
+      wallpaperType = WALLPAPER_TYPE_HOME;
+    }
     executor.execute(() -> {
       try {
         URL url = new URL(imageUrl);
