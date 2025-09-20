@@ -1,0 +1,19 @@
+{
+  "login": {
+    "title": "Iniciar sesión",
+    "welcome": "Bienvenido de nuevo",
+    "subtitle": "Ingresa para seguir explorando MyWally.",
+    "email": "Correo",
+    "emailPlaceholder": "tu@email.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Ingresa tu contraseña",
+    "button": "Entrar",
+    "noAccount": "¿No tienes cuenta?",
+    "signup": "Regístrate"
+  },
+  
+  "lang": {
+    "english": "English",
+    "spanish": "Spanish"
+  }
+}

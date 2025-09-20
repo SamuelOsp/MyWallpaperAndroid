@@ -9,21 +9,23 @@ import { ToggleTranslateComponent } from './Components/toggle-translate/toggle-t
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from './services/user/user';
-
+import { TranslateModule } from '@ngx-translate/core';
 const components = [ButtonComponent, CardComponent,InputComponent, 
-  LinkComponent,FloatingButtonComponent, ToggleTranslateComponent
+  LinkComponent,FloatingButtonComponent, ToggleTranslateComponent, 
 ];
 const providers = [User];
 
 const modules = [CommonModule,
     IonicModule,
     FormsModule,
-    ReactiveFormsModule];
+    ReactiveFormsModule,
+    TranslateModule,
+  ];
 
 @NgModule({
   declarations: [...components],
   imports: [ ...modules],
   providers: [...providers],
-  exports: [...components],
+  exports: [...components, TranslateModule],
 })
 export class SharedModule { }
