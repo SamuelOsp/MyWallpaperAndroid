@@ -1,3 +1,19 @@
-<p>
-  floating-button works!
-</p>
+<ion-fab [vertical]="vertical" [horizontal]="horizontal" [edge]="edge" slot="fixed">
+  <ion-fab-button [disabled]="disabled" [color]="color">
+    <ion-icon [name]="icon"></ion-icon>
+  </ion-fab-button>
+
+  <ion-fab-list [side]="side">
+    <ion-fab-button *ngIf="showEdit" (click)="edit.emit()" [color]="secondaryColor || 'primary'">
+      <ion-icon name="person-circle"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button *ngIf="showAdd" (click)="add.emit()" [color]="secondaryColor || 'primary'">
+      <ion-icon name="image"></ion-icon>
+    </ion-fab-button>
+
+    <ion-fab-button *ngIf="showLogout" (click)="logout.emit()" [color]="dangerColor || 'danger'">
+      <ion-icon name="log-out"></ion-icon>
+    </ion-fab-button>
+  </ion-fab-list>
+</ion-fab>
