@@ -1,9 +1,9 @@
-/* Fondo consistente */
+
 .reg-bg {
   --background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
 }
 
-/* Header vidrio */
+
 .glass-header ion-toolbar {
   --background: rgba(255, 255, 255, 0.08);
   -webkit-backdrop-filter: blur(12px) saturate(140%);
@@ -24,10 +24,9 @@
   --padding-top: calc(var(--ion-safe-area-top) + var(--ion-toolbar-height, 56px));
 }
 
-/* Contenedor interno */
 .home-container { padding: 16px; }
 
-/* Grid de cards */
+
 .cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -37,7 +36,7 @@
   .cards-grid { grid-template-columns: repeat(3, 1fr); }
 }
 
-/* Liquid glass card (sin halos/blancos) */
+
 app-card.img-card {
   display: block;
   padding: 12px;

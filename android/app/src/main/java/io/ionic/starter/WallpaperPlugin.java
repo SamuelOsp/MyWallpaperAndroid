@@ -41,7 +41,7 @@ public class WallpaperPlugin extends Plugin {
 
     if (imageUrl == null || imageUrl.isEmpty()) {
       call.reject("Must provide an imageUrl");
-      return;6
+      return;
     }
 
     final int wallpaperType;
