@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 import { User } from 'src/app/shared/services/user/user';
 
@@ -20,7 +21,8 @@ export class RegisterPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private readonly userSrv: User,
-    private toast: NativeToast
+    private toast: NativeToast,
+    private t: TranslateService
   ) {
     this.initForm();
   }
@@ -39,23 +41,24 @@ export class RegisterPage implements OnInit {
       password: this.password,
     });
   }
-  public async doRegister(){
-    
-    if (this.registerForm.invalid) {
+  public async doRegister() {
+  if (this.registerForm.invalid) {
     this.registerForm.markAllAsTouched(); 
-    this.toast.show('Please complete all required fields.', 'danger', 'bottom');
+    this.toast.show(this.t.instant('register.messages.incomplete'), 'danger', 'bottom');
     return;
   }
-    try {
-      console.log(this.registerForm.value);
-      await this.userSrv.create(this.registerForm.value as any);
-      this.toast.show('Registration successful. Welcome!', 'success', 'bottom');
-
-      this.navCtrl.navigateRoot('/login');
-    } catch (e: any) {
-      this.toast.show(`Registration failed: ${e?.message ?? 'Please try again.'}`, 'danger', 'bottom');
-    }
+  try {
+    await this.userSrv.create(this.registerForm.value as any);
+    this.toast.show(this.t.instant('register.messages.success'), 'success', 'bottom');
+    this.navCtrl.navigateRoot('/login');
+  } catch (e: any) {
+    const msg = this.t.instant('register.messages.fail', {
+      error: e?.message ?? this.t.instant('register.messages.tryAgain')
+    });
+    this.toast.show(msg, 'danger', 'bottom');
   }
+}
+
 
 
     public goToLogin() {

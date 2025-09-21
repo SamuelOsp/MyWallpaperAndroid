@@ -1,0 +1,17 @@
+.lang-box {
+  margin-top: 8px;
+  padding: 12px 12px 8px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+.lang-item {
+  --background: transparent;
+  --inner-padding-end: 0;
+  --inner-padding-start: 0;
+  --padding-start: 0;
+  --padding-end: 0;
+  color: #eaeaea;
+}
+.lang-icon { font-size: 18px; opacity: 0.9; color: var(--ion-color-primary); }
+.lang-label { font-weight: 600; letter-spacing: 0.2px; }

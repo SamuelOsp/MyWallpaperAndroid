@@ -11,8 +11,53 @@
     "noAccount": "Don't have an account?",
     "signup": "Sign Up"
     },
+
     "lang": {
     "english": "English",
     "spanish": "Spanish"
+    },
+
+  "register": {
+    "title": "Create account",
+    "subtitle": "Join MyWally and start today.",
+    "firstName": "First Name",
+    "firstNamePlaceholder": "Enter your first name",
+    "lastName": "Last Name",
+    "lastNamePlaceholder": "Enter your last name",
+    "email": "Email",
+    "emailPlaceholder": "your@email.com",
+    "password": "Password",
+    "passwordPlaceholder": "Minimum 5 characters",
+    "button": "Sign Up",
+    "haveAccount": "Already have an account?",
+    "login": "Log In",
+    "messages": {
+      "incomplete": "Please complete all required fields.",
+      "success": "Registration successful. Welcome!",
+      "fail": "Registration failed: {{error}}"
+    }
+  },
+  "update": {
+    "title": "Update your profile",
+  "subtitle": "Edit your info and avatar.",
+  "name": "Name",
+  "namePlaceholder": "Your first name",
+  "lastname": "Last name",
+  "lastnamePlaceholder": "Your last name",
+  "email": "Email",
+  "emailPlaceholder": "your@email.com",
+  "emailHint": "Email changes require re-authentication.",
+  "changePhoto": "Change photo",
+  "save": "Save changes",
+  "cancel": "Cancel",
+  "avatarReady": "Avatar ready to save.",
+  "saved": "Profile updated.",
+  "errors": {
+    "incomplete": "Please complete the required fields.",
+    "session": "Your session has expired. Please sign in again.",
+    "save": "Could not save: {{err}}",
+    "avatar": "Avatar upload failed: {{err}}"
   }
+  }
+  
 }

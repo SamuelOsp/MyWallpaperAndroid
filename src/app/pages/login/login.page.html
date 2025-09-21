@@ -58,25 +58,7 @@
 
           <ion-row class="lang-switch">
             <ion-col size="12">
-              <div class="lang-box">
-                <ion-item lines="none" class="lang-item" detail="false">
-                  <ion-icon
-                    name="language-outline"
-                    slot="start"
-                    class="lang-icon"
-                  ></ion-icon>
-                  <ion-label class="lang-label">
-                    {{ lang === 'en' ? ('lang.english' | translate) :
-                    ('lang.spanish' | translate) }}
-                  </ion-label>
-                  <ion-toggle
-                    aria-label="Language"
-                    slot="end"
-                    [checked]="lang === 'es'"
-                    (ionChange)="changeLang($event.detail.checked ? 'es' : 'en')"
-                  ></ion-toggle>
-                </ion-item>
-              </div>
+              <app-toggle-translate></app-toggle-translate>
             </ion-col>
           </ion-row>
         </ion-grid>

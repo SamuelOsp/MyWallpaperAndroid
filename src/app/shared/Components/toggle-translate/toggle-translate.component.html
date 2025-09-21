@@ -1,3 +1,14 @@
-<p>
-  toggle-translate works!
-</p>
+<div class="lang-box">
+  <ion-item lines="none" class="lang-item" detail="false">
+    <ion-icon name="language-outline" slot="start" class="lang-icon"></ion-icon>
+    <ion-label class="lang-label">
+      {{ lang === 'en' ? ('lang.english' | translate) : ('lang.spanish' | translate) }}
+    </ion-label>
+    <ion-toggle
+      aria-label="Language"
+      slot="end"
+      [checked]="lang === 'es'"
+      (ionChange)="change($event.detail.checked ? 'es' : 'en')"
+    ></ion-toggle>
+  </ion-item>
+</div>

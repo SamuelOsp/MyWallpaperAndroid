@@ -15,5 +15,47 @@
   "lang": {
     "english": "English",
     "spanish": "Spanish"
+  },
+  "register": {
+    "title": "Crear cuenta",
+    "subtitle": "Únete a MyWally y empieza hoy.",
+    "firstName": "Nombre",
+    "firstNamePlaceholder": "Ingresa tu nombre",
+    "lastName": "Apellido",
+    "lastNamePlaceholder": "Ingresa tu apellido",
+    "email": "Correo",
+    "emailPlaceholder": "tu@email.com",
+    "password": "Contraseña",
+    "passwordPlaceholder": "Mínimo 5 caracteres",
+    "button": "Registrarse",
+    "haveAccount": "¿Ya tienes una cuenta?",
+    "login": "Iniciar sesión",
+    "messages": {
+      "incomplete": "Por favor completa todos los campos requeridos.",
+      "success": "Registro exitoso. ¡Bienvenido!",
+      "fail": "No se pudo registrar: {{error}}"
+    }
+  },
+  "update": {
+    "title": "Actualiza tu perfil",
+  "subtitle": "Edita tu información y avatar.",
+  "name": "Nombre",
+  "namePlaceholder": "Tu nombre",
+  "lastname": "Apellido",
+  "lastnamePlaceholder": "Tu apellido",
+  "email": "Correo",
+  "emailPlaceholder": "tu@email.com",
+  "emailHint": "Cambiar el correo requiere reautenticación.",
+  "changePhoto": "Cambiar foto",
+  "save": "Guardar cambios",
+  "cancel": "Cancelar",
+  "avatarReady": "Avatar listo para guardar.",
+  "saved": "Perfil actualizado.",
+  "errors": {
+    "incomplete": "Completa los campos requeridos.",
+    "session": "Tu sesión expiró. Inicia sesión de nuevo.",
+    "save": "No se pudo guardar: {{err}}",
+    "avatar": "Error subiendo avatar: {{err}}"
+  }
   }
 }

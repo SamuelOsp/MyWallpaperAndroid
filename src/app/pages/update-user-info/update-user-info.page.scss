@@ -1,0 +1,114 @@
+.reg-bg {
+  --background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+}
+
+.reg-container {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.reg-card {
+  width: 100%;
+  max-width: 480px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(10px);
+  color: #f5f5f5;
+}
+
+.headline {
+  text-align: center;
+  margin-bottom: 16px;
+
+  ion-icon {
+    font-size: 50px;
+    color: var(--ion-color-primary);
+    margin-bottom: 12px;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.7));
+  }
+
+  h1 {
+    margin: 0 0 4px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+  }
+
+  .subtitle {
+    margin: 0 0 12px;
+    color: #d1d1d1;
+    font-size: 14px;
+  }
+}
+
+.no-pad { --ion-grid-padding: 0; }
+.g-12 { row-gap: 12px; }
+
+.help-text {
+  margin: 6px 2px 0;
+  font-size: 12px;
+  color: #d1d1d1;
+}
+
+.actions {
+  margin-top: 8px;
+
+  .muted {
+    text-align: center;
+    color: #cccccc;
+    font-size: 14px;
+  }
+}
+
+.avatar-box {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 12px;
+  align-items: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px;
+
+  img {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  }
+
+  .avatar-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
+
+.lang-switch { margin-top: 10px; }
+
+ion-content,
+ion-input,
+h1,
+.subtitle {
+  font-family: 'Poppins', sans-serif;
+}
+.glass-header ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  --color: #fff;
+}
+.glass-header ion-title {
+  font-weight: 700;
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0,0,0,.6);
+}
+.glass-header ion-back-button {
+  --color: #fff;
+}

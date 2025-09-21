@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Language } from 'src/app/core/services/language';
 
 @Component({
   selector: 'app-toggle-translate',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
   standalone: false
 })
 export class ToggleTranslateComponent  implements OnInit {
+lang!: string;
 
-  constructor() { }
+  constructor(private langSvc: Language) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.lang = this.langSvc.current();
+  }
 
+  change(l: string) {
+    this.langSvc.use(l); 
+    this.lang = l;
+  }
 }

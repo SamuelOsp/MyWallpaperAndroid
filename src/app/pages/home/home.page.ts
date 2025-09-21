@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
     private readonly authSrv: Auth,
     private actionSheetCtrl: ActionSheetController,
     private toast: NativeToast,
-    private platform: Platform
+    private platform: Platform,
   ) {}
 
   async ngOnInit() {

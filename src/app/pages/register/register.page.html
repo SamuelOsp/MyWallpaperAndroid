@@ -2,11 +2,9 @@
   <div class="reg-container">
     <app-card class="reg-card">
       <div class="headline">
-        <ion-icon name="planet-outline"></ion-icon>
-        <h1>Create your account</h1>
-        <p class="subtitle">
-          Join MyWally to sync and personalize your wallpapers.
-        </p>
+        <ion-icon name="person-add-outline"></ion-icon>
+        <h1>{{ 'register.title' | translate }}</h1>
+        <p class="subtitle">{{ 'register.subtitle' | translate }}</p>
       </div>
 
       <form [formGroup]="registerForm" (ngSubmit)="doRegister()" novalidate>
@@ -14,69 +12,67 @@
           <ion-row class="g-12">
             <ion-col size="12" size-md="6">
               <app-input
-                label="First Name"
+                [label]="'register.firstName' | translate"
                 type="text"
-                placeholder="Enter your first name"
+                [placeholder]="'register.firstNamePlaceholder' | translate"
                 formControlName="name"
                 required
-              >
-              </app-input>
+              ></app-input>
             </ion-col>
 
             <ion-col size="12" size-md="6">
               <app-input
-                label="Last Name"
+                [label]="'register.lastName' | translate"
                 type="text"
-                placeholder="Enter your last name"
+                [placeholder]="'register.lastNamePlaceholder' | translate"
                 formControlName="lastname"
                 required
-              >
-              </app-input>
+              ></app-input>
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col size="12">
               <app-input
-                label="Email"
+                [label]="'register.email' | translate"
                 type="email"
-                placeholder="your@email.com"
+                [placeholder]="'register.emailPlaceholder' | translate"
                 formControlName="email"
                 required
-              >
-              </app-input>
+              ></app-input>
             </ion-col>
           </ion-row>
 
           <ion-row>
             <ion-col size="12">
               <app-input
-                label="Password"
+                [label]="'register.password' | translate"
                 type="password"
-                placeholder="Minimum 5 characters"
+                [placeholder]="'register.passwordPlaceholder' | translate"
                 formControlName="password"
                 required
-              >
-              </app-input>
+              ></app-input>
             </ion-col>
           </ion-row>
 
           <ion-row class="actions">
             <ion-col size="12">
-              <app-button
-                type="submit"
-                color="primary"
-                [disabled]="registerForm.invalid"
-              >
-                Sign Up
+              <app-button type="submit" color="primary" [disabled]="registerForm.invalid">
+                {{ 'register.button' | translate }}
               </app-button>
             </ion-col>
 
             <ion-col size="12" class="muted">
-              Already have an account?
+              {{ 'register.haveAccount' | translate }}
               <app-button color="secondary" fill="clear" (click)="goToLogin()">
-                Log In
+                {{ 'register.login' | translate }}
               </app-button>
+            </ion-col>
+          </ion-row>
+
+          <ion-row class="lang-switch">
+            <ion-col size="12">
+              <app-toggle-translate></app-toggle-translate>
             </ion-col>
           </ion-row>
         </ion-grid>
