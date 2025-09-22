@@ -10,8 +10,9 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { User } from './services/user/user';
 import { TranslateModule } from '@ngx-translate/core';
+import { SideBarComponent } from './Components/side-bar/side-bar.component';
 const components = [ButtonComponent, CardComponent,InputComponent, 
-  LinkComponent,FloatingButtonComponent, ToggleTranslateComponent, 
+  LinkComponent,FloatingButtonComponent, ToggleTranslateComponent, SideBarComponent
 ];
 const providers = [User];
 

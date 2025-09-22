@@ -16,8 +16,11 @@ export const environment = {
   SUPABASE: {
     URL: 'https://cvtglgubewjjvlvbmjoz.supabase.co',
     API_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2dGdsZ3ViZXdqanZsdmJtam96Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTgxMjYyMDUsImV4cCI6MjA3MzcwMjIwNX0.JNdx4uWSyqRtzi2BTA13WKY5OM-MEm1Rz5jkT7fzkxY'
-  }
+  },
 
+
+  PIXABAY_API_KEY: '52402044-6847e61c13163719246d2247c',
+  PIXABAY_BASE_URL: 'https://pixabay.com/api/'
 
 };
 

@@ -24,7 +24,7 @@
   --padding-top: calc(var(--ion-safe-area-top) + var(--ion-toolbar-height, 56px));
 }
 
-.home-container { padding: 16px; }
+.home-container { padding: 40px; }
 
 
 .cards-grid {
@@ -39,7 +39,6 @@
 
 app-card.img-card {
   display: block;
-  padding: 12px;
   border-radius: 16px;
   background: linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
   -webkit-backdrop-filter: blur(12px) saturate(140%);

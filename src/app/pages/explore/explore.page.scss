@@ -1,0 +1,53 @@
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.14);
+  --glass-border: rgba(255, 255, 255, 0.28);
+  --glass-shadow: rgba(0, 0, 0, 0.12);
+  --blur-size: 14px;
+  --radius: 16px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --glass-bg: rgba(16, 16, 16, 0.28);
+    --glass-border: rgba(255, 255, 255, 0.10);
+    --glass-shadow: rgba(0, 0, 0, 0.35);
+  }
+}
+
+.glass-toolbar,
+.glass-subbar {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--blur-size));
+  -webkit-backdrop-filter: blur(var(--blur-size));
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 6px 20px var(--glass-shadow);
+}
+
+.glass-subbar { padding: 6px 10px 8px; display: flex; justify-content: space-between; align-items: center; }
+
+.glass-content {
+  --padding-start: 12px;
+  --padding-end: 12px;
+  --padding-bottom: 12px;
+}
+
+.liquid-fab {
+  --background: var(--glass-bg);
+  --background-activated: var(--glass-bg);
+  --box-shadow: 0 8px 24px var(--glass-shadow);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+.meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 6px 4px;
+  color: #111;
+  font-size: 13px;
+}
+.meta-left ion-icon { vertical-align: middle; }
+.meta-right { display: flex; align-items: center; gap: 6px; }
+.meta .user { opacity: .9; }

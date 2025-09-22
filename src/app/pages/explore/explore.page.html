@@ -1,0 +1,65 @@
+<ion-header class="glass-header" [translucent]="true">
+  <ion-toolbar class="glass-toolbar">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ 'EXPLORE.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="glass-content">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="items$ | async as items; else loadingState">
+    @if (items.length) {
+      <div class="cards-grid">
+        <ng-container *ngFor="let it of items; trackBy: trackById">
+          <app-card class="liquid-card">
+            <button class="img-wrap" type="button" (click)="onImageTap(it)">
+              <img
+                [src]="it.largeImageURL"
+                [alt]="it.tags"
+                loading="lazy"
+                decoding="async" />
+            </button>
+
+           
+            <div class="meta">
+              <div class="meta-left">
+                <ion-icon name="heart-outline"></ion-icon>
+                <span>{{ it.likes }}</span>
+                <ion-icon name="download-outline" style="margin-left:10px"></ion-icon>
+                <span>{{ it.downloads }}</span>
+              </div>
+              <div class="meta-right">
+                <ion-avatar *ngIf="it.user">
+                 
+                  <img [src]="it['userImageURL'] || ''" alt="" *ngIf="it['userImageURL']">
+                </ion-avatar>
+                <span class="user">{{ it.user }}</span>
+              </div>
+            </div>
+          </app-card>
+        </ng-container>
+      </div>
+    } @else {
+      <div class="empty">
+        <ion-icon name="image-outline"></ion-icon>
+        <p>{{ 'EXPLORE.NO_RESULTS' | translate }}</p>
+      </div>
+    }
+  </ng-container>
+
+  <ng-template #loadingState>
+    <div class="skeleton-grid">
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+      <ion-skeleton-text animated class="sk-item"></ion-skeleton-text>
+    </div>
+  </ng-template>
+</ion-content>

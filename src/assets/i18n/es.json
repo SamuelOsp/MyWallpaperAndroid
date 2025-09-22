@@ -57,5 +57,38 @@
     "save": "No se pudo guardar: {{err}}",
     "avatar": "Error subiendo avatar: {{err}}"
   }
+  },
+  
+  "EXPLORE": {
+    "TITLE": "Explorar",
+    "NO_RESULTS": "No hay resultados."
+  
+  },
+   "SIDEBAR": { "TITLE": "Categorías" },
+  "CATEGORIES": {
+    "nature": "Naturaleza",
+    "animals": "Animales",
+    "abstract": "Abstracto",
+    "space": "Espacio",
+    "city": "Ciudad",
+    "cars": "Autos",
+    "landscape": "Paisajes"
+  },
+  "ACTIONSHEET": {
+    "TITLE": "Establecer como fondo de pantalla",
+    "HOME": "Pantalla principal",
+    "LOCK": "Pantalla de bloqueo",
+    "BOTH": "Ambas",
+    "CANCEL": "Cancelar",
+    "SUCCESS": "Wallpaper aplicado con éxito.",
+    "ERR_NOT_FOUND": "La imagen no existe",
+    "ERR_UNKNOWN": "Error desconocido"
+  },
+  "home": {
+    "title": "Mis Wallpapers",
+    "empty": {
+      "title": "Aún no tienes imágenes",
+      "subtitle": "Agrega tu primer wallpaper usando el botón flotante."
+    }
   }
 }

@@ -1,9 +1,8 @@
 // home.page.ts
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
   ActionSheetController,
   NavController,
-  ToastController,
   Platform,
 } from '@ionic/angular';
 import {Wallpaper} from 'src/capacitor/wallpaper'; 
@@ -16,7 +15,7 @@ import { getAuth } from 'firebase/auth';
 import { BehaviorSubject } from 'rxjs';
 import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 
-enum WallpaperType {
+export enum WallpaperType {
   HOME = 1,
   LOCK = 2,
   BOTH = 3,
@@ -33,6 +32,8 @@ export class HomePage implements OnInit {
   public imageUrl$ = new BehaviorSubject<string>('');
   public images$ = new BehaviorSubject<string[]>([]);
   private firebaseUid = '';
+  
+
 
   constructor(
     private navCtrl: NavController,

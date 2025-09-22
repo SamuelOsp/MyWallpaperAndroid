@@ -1,11 +1,22 @@
+
+<ion-menu contentId="main-content" side="start" swipeGesture="true">
+
+
+<app-side-bar></app-side-bar> 
+</ion-menu>
+
+
 <ion-header translucent="true" class="glass-header">
-  <ion-toolbar>
+  <ion-toolbar class="glass-toolbar">
+    <ion-buttons slot="start">
+      <ion-menu-button autoHide="false"></ion-menu-button>
+    </ion-buttons>
     <ion-title>{{ 'home.title' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 
-<ion-content [fullscreen]="true" class="reg-bg home-content">
+<ion-content id="main-content" [fullscreen]="true" class="reg-bg home-content">
   <div class="home-container">
     <ng-container *ngIf="images$ | async as imgs">
       <div class="cards-grid" *ngIf="imgs.length; else emptyState">
@@ -26,6 +37,7 @@
     </ng-container>
   </div>
 
+ 
   <app-floating-button
     (edit)="editProfile()"
     (add)="addImage()"

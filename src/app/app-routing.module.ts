@@ -14,8 +14,8 @@ const routes: Routes = [
     path: 'register',
     loadChildren: () =>
       import('./pages/register/register.module').then(
-        (m) => m.RegisterPageModule
-      ),
+        (m) => m.RegisterPageModule),
+        canActivate: [NoAuthGuard]
   },
 
   {
@@ -32,11 +32,17 @@ const routes: Routes = [
         (m) => m.UpdateUserInfoPageModule
       ),
   },
+ {
+    path: 'explore/:category',
+    loadChildren: () => import('./pages/explore/explore.module').then( m => m.ExplorePageModule)
+  },
+
   {
     path: '',
     redirectTo: 'home',
     pathMatch: 'full',
   },
+ 
 ];
 
 @NgModule({

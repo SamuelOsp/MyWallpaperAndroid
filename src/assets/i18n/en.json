@@ -58,6 +58,39 @@
     "save": "Could not save: {{err}}",
     "avatar": "Avatar upload failed: {{err}}"
   }
+  },
+  "EXPLORE": {
+    "TITLE": "Explore",
+    "NO_RESULTS": "No results."
+  },
+  "SIDEBAR": { "TITLE": "Categories" },
+  "CATEGORIES": {
+    "nature": "Nature",
+    "animals": "Animals",
+    "abstract": "Abstract",
+    "space": "Space",
+    "city": "City",
+    "cars": "Cars",
+    "landscape": "Landscapes"
+  },
+  "ACTIONSHEET": {
+    "TITLE": "Set as wallpaper",
+    "HOME": "Home screen",
+    "LOCK": "Lock screen",
+    "BOTH": "Both",
+    "CANCEL": "Cancel",
+    "SUCCESS": "Wallpaper successfully set.",
+    "ERR_NOT_FOUND": "The image does not exist",
+    "ERR_UNKNOWN": "Unknown error"
+  },
+  "home": {
+    "title": "My Wallpapers",
+    "empty": {
+      "title": "You don't have any images yet",
+      "subtitle": "Add your first wallpaper using the floating button."
+    }
   }
+
+
   
 }

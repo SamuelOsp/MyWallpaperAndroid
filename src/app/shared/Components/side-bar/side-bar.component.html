@@ -1,0 +1,17 @@
+<ion-header class="glass-header" [translucent]="true">
+  <ion-toolbar class="glass-toolbar">
+    <ion-title>{{ 'SIDEBAR.TITLE' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="glass-content">
+  <ion-list class="glass-list">
+    <ion-item
+      class="glass-item"
+      button
+      *ngFor="let c of categories; trackBy: trackByKey"
+      (click)="selectCategory(c.key)">
+      <ion-label>{{ c.label | translate }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
