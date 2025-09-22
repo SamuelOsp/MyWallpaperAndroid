@@ -57,7 +57,7 @@
 
           <ion-row class="actions">
             <ion-col size="12">
-              <app-button type="submit" color="primary" [disabled]="registerForm.invalid">
+              <app-button type="submit" color="primary" [disabled]="registerForm.invalid" (click)="showLoading()">
                 {{ 'register.button' | translate }}
               </app-button>
             </ion-col>

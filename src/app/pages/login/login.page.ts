@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { Auth } from 'src/app/core/providers/auth/auth';
 import { Language } from 'src/app/core/services/language';
 
@@ -33,13 +33,21 @@ export class LoginPage implements OnInit {
   constructor(
     private navCtrl: NavController,
     private readonly authSrv: Auth,
-    private langSvc: Language
+    private langSvc: Language,
+    private loadingCtrl: LoadingController
   ) {}
    ngOnInit(): void {
     this.lang = this.langSvc.current();
     this.langs = this.langSvc.supported();
   }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 3000,
+    });
 
+    loading.present();
+  }
   async doLogin(){
      if (this.loginForm.invalid) return;
     try {

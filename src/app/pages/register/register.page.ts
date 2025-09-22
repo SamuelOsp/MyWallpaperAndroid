@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 import { User } from 'src/app/shared/services/user/user';
@@ -22,7 +22,8 @@ export class RegisterPage implements OnInit {
     private navCtrl: NavController,
     private readonly userSrv: User,
     private toast: NativeToast,
-    private t: TranslateService
+    private t: TranslateService,
+    private loadingCtrl: LoadingController
   ) {
     this.initForm();
   }
@@ -40,6 +41,14 @@ export class RegisterPage implements OnInit {
       email: this.email,
       password: this.password,
     });
+  }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 3000,
+    });
+
+    loading.present();
   }
   public async doRegister() {
   if (this.registerForm.invalid) {

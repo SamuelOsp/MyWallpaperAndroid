@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ButtonComponent } from './Components/button/button.component';
 import { CardComponent } from './Components/card/card.component';
 import { InputComponent } from './Components/input/input.component';
-import { LinkComponent } from './Components/link/link.component';
 import { FloatingButtonComponent } from './Components/floating-button/floating-button.component';
 import { ToggleTranslateComponent } from './Components/toggle-translate/toggle-translate.component';
 import { IonicModule } from '@ionic/angular';
@@ -12,7 +11,7 @@ import { User } from './services/user/user';
 import { TranslateModule } from '@ngx-translate/core';
 import { SideBarComponent } from './Components/side-bar/side-bar.component';
 const components = [ButtonComponent, CardComponent,InputComponent, 
-  LinkComponent,FloatingButtonComponent, ToggleTranslateComponent, SideBarComponent
+  FloatingButtonComponent, ToggleTranslateComponent, SideBarComponent
 ];
 const providers = [User];
 

@@ -2,6 +2,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import {
   ActionSheetController,
+  LoadingController,
   NavController,
   Platform,
 } from '@ionic/angular';
@@ -43,6 +44,7 @@ export class HomePage implements OnInit {
     private actionSheetCtrl: ActionSheetController,
     private toast: NativeToast,
     private platform: Platform,
+    private loadingCtrl: LoadingController
   ) {}
 
   async ngOnInit() {
@@ -79,7 +81,14 @@ export class HomePage implements OnInit {
   }
 
   trackByUrl = (_: number, url: string) => url;
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 3000,
+    });
 
+    loading.present();
+  }
   public async addImage() {
     const res = await this.fileSrv.pickImage();
     this.image = res;

@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, switchMap, startWith } from 'rxjs';
 import { PixabayWallApiService } from 'src/app/core/data/pixabay-wall-api.service';
-import { ActionSheetController, Platform } from '@ionic/angular';
+import { ActionSheetController, LoadingController, Platform } from '@ionic/angular';
 import { NativeToast } from 'src/app/core/providers/nativeToast/native-toast';
 import { Wallpaper } from 'src/capacitor/wallpaper';
 import { WallpaperType } from '../home/home.page';
@@ -23,7 +23,8 @@ export class ExplorePage {
   private platform = inject(Platform);
   private toast = inject(NativeToast);
   private i18n = inject(TranslateService);
-
+  private loadingCtrl = inject(LoadingController);
+  
   category$ = this.route.paramMap.pipe(
     map(p => p.get('category') || 'nature')
   );
@@ -59,7 +60,14 @@ export class ExplorePage {
     });
     await actionSheet.present();
   }
+  async showLoading() {
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...',
+      duration: 3000,
+    });
 
+    loading.present();
+  }
   private async setMyWallpaper(type: WallpaperType, imgUrl: string) {
     const t = (k: string) => this.i18n.instant(k);
     const url = imgUrl?.trim();
