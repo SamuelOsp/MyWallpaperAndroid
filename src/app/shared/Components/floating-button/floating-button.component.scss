@@ -12,9 +12,9 @@
   }
 }
 :host {
-  /* el host no necesita position fixed si usas ion-fab con slot="fixed" */
-  display: contents; /* evita contenedor extra que pueda desplazar */
+  
+  display: contents; 
 }
 
-/* seguridad por si algo lo tapa */
+
 ion-fab { z-index: 20; }
