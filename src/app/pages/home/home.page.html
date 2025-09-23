@@ -1,10 +1,6 @@
-
 <ion-menu contentId="main-content" side="start" swipeGesture="true">
-
-
-<app-side-bar></app-side-bar> 
+  <app-side-bar></app-side-bar>
 </ion-menu>
-
 
 <ion-header translucent="true" class="glass-header">
   <ion-toolbar class="glass-toolbar">
@@ -15,15 +11,17 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content id="main-content" [fullscreen]="true" class="reg-bg home-content">
   <div class="home-container">
     <ng-container *ngIf="images$ | async as imgs">
       <div class="cards-grid" *ngIf="imgs.length; else emptyState">
-        <app-card class="img-card" *ngFor="let img of imgs; trackBy: trackByUrl">
-          <app-button class="img-wrap" type="button" (click)="showWallpaperOptions(img)">
+        <app-card
+          class="img-card"
+          *ngFor="let img of imgs; trackBy: trackByUrl"
+        >
+          <div class="img-wrap" (click)="showWallpaperOptions(img)">
             <img [src]="img" loading="lazy" alt="wallpaper" />
-          </app-button>
+          </div>
         </app-card>
       </div>
 
@@ -37,7 +35,6 @@
     </ng-container>
   </div>
 
- 
   <app-floating-button
     (edit)="editProfile()"
     (add)="addImage()"
@@ -45,6 +42,8 @@
     vertical="bottom"
     horizontal="end"
     side="top"
-    color="primary">
+    color="primary"
+    slot="fixed"
+  >
   </app-floating-button>
 </ion-content>

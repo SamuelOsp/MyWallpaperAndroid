@@ -1,3 +1,12 @@
-<button class="app-btn">
-  <ng-content></ng-content>
-</button>
+<ion-button
+      class="app-btn"
+      [attr.type]="type"
+      [disabled]="disabled"
+      [color]="color"
+      [expand]="expand"
+      [fill]="fill"
+      [size]="size"
+      [shape]="shape"
+      [strong]="strong">
+      <ng-content></ng-content>
+</ion-button>
